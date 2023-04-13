@@ -2,12 +2,13 @@ const express = require('express') //importing express library
 const app = express() //init the express library. app is an instance of express
 
 const BodyParser = require('body-parser') //importing body parser...it is required to read the body that comes from client in post request
+const { default: mongoose } = require('mongoose')
 app.use(BodyParser.json()) //app instance is now using body parser
 
 
 
 //connecting to database (mongo db)
-mongoose.connect("<mongo db port number (terminal->'mongo sh' command)>", ()=>{
+mongoose.connect("").then(()=>{
     console.log("Connected to DB")
 })
 
@@ -49,7 +50,7 @@ app.post('/books', async (req,res)=>{
 })
 
 
-
+app.use('/api/books', require('./books/books.api'))
 
 
 
